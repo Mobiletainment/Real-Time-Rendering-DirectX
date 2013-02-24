@@ -11,7 +11,7 @@ Besides using the keyboard and mouse to navigate through the scene, there's also
 How to play?
 ------------
 | Key             | Action  |
-| --------------- | -------:|
+| --------------: | :-------|
 | ESC             | Exit    |
 | W, S, A, D      | Move camera front (W), back (S), left (A) or right (D) |
 | Arrow Keys      | Move light  front (↑), back (↓), left (←) or right (→) |
@@ -44,7 +44,7 @@ How to compile?
 
 Where to get help?
 ------------
-* Read the documentation in the docs directory (currently only available in German)
+* Check the docs directory for documentation
 * Have a look at the [project's website](http://www.pertiller.me/projects/)
 * Contact the author at david@pertiller.me
 
@@ -52,7 +52,7 @@ License
 ------------
 (The MIT License)
 
-Copyright (c) 2012 David Pertiller <david@pertiller.me>
+Copyright (c) 2012 [David Pertiller](http://www.pertiller.me)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
