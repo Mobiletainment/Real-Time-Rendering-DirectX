@@ -1,0 +1,610 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<title>Real-time Rendering with DirectX 10</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"MS Gothic";
+	panose-1:2 11 6 9 7 2 5 8 2 4;}
+@font-face
+	{font-family:"MS Gothic";
+	panose-1:2 11 6 9 7 2 5 8 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"MS Shell Dlg 2";
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:"\@MS Gothic";
+	panose-1:2 11 6 9 7 2 5 8 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+h1
+	{mso-style-link:"Überschrift 1 Zchn";
+	margin-top:24.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Cambria","serif";
+	color:#365F91;}
+h2
+	{mso-style-link:"Überschrift 2 Zchn";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Cambria","serif";
+	font-style:italic;}
+h3
+	{mso-style-link:"Überschrift 3 Zchn";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:13.0pt;
+	font-family:"Cambria","serif";}
+h4
+	{mso-style-link:"Überschrift 4 Zchn";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:11.0pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:22.0pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-link:"Kopfzeile Zchn";
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-link:"Fußzeile Zchn";
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoCaption, li.MsoCaption, div.MsoCaption
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;
+	font-size:10.0pt;
+	font-family:"Calibri","sans-serif";
+	font-weight:bold;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{mso-style-link:"Titel Zchn";
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	text-align:center;
+	line-height:115%;
+	font-size:16.0pt;
+	font-family:"Cambria","serif";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:#954F72;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Sprechblasentext Zchn";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+p.MsoTocHeading, li.MsoTocHeading, div.MsoTocHeading
+	{margin-top:24.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.berschrift1Zchn
+	{mso-style-name:"Überschrift 1 Zchn";
+	mso-style-link:"Überschrift 1";
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.berschrift2Zchn
+	{mso-style-name:"Überschrift 2 Zchn";
+	mso-style-link:"Überschrift 2";
+	font-family:"Cambria","serif";
+	font-weight:bold;
+	font-style:italic;}
+span.KopfzeileZchn
+	{mso-style-name:"Kopfzeile Zchn";
+	mso-style-link:Kopfzeile;}
+span.FuzeileZchn
+	{mso-style-name:"Fußzeile Zchn";
+	mso-style-link:Fußzeile;}
+span.berschrift3Zchn
+	{mso-style-name:"Überschrift 3 Zchn";
+	mso-style-link:"Überschrift 3";
+	font-family:"Cambria","serif";
+	font-weight:bold;}
+span.berschrift4Zchn
+	{mso-style-name:"Überschrift 4 Zchn";
+	mso-style-link:"Überschrift 4";
+	font-family:"Calibri","sans-serif";
+	font-weight:bold;}
+span.TitelZchn
+	{mso-style-name:"Titel Zchn";
+	mso-style-link:Titel;
+	font-family:"Cambria","serif";
+	font-weight:bold;}
+span.SprechblasentextZchn
+	{mso-style-name:"Sprechblasentext Zchn";
+	mso-style-link:Sprechblasentext;
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=DE-AT link=blue vlink="#954F72">
+
+<div class=WordSection1>
+
+<p class=MsoTitle>Real-time Rendering mit DirectX 10</p>
+
+<h1><a name="_Toc341647361"></a><a name="_Toc341647347">Screenshot (Auszug):</a></h1>
+
+<p class=MsoNormal><img width=856 height=536
+src="Screenshot.png"></p>
+
+<h1><a name="_Toc341647365"></a><a name="_Toc341647351">Steuerung:</a></h1>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=794
+ style='width:476.2pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border:solid windowtext 1.0pt;
+  background:#4F81BD;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b><span style='color:white'>Taste</span></b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border:solid windowtext 1.0pt;
+  border-left:none;background:#4F81BD;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b><span style='color:white'>Funktion</span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>ESC</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Programm beenden</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>W, S, A, D</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Kameraposition vor (W), zurück (S), links (A) bzw. rechts (D)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none'><b>Pfeiltasten &#8593;&#8595;&#8592; &#8594;</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Lichtposition vor (&#8593;), zurück (&#8595;), links (&#8592;) bzw.
+  rechts (&#8594;)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>Mausbewegung</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Blickrichtung verändern</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>Q, E</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Kamera Roll nach links (Q) bzw. rechts (E)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>Space</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Aktuelle Position als Kontrollpunkt für Kamerafahrt speichern</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>Enter</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Kamerafahrt starten (sofern mindestens 4 Kontrollpunkte gespeichert
+  wurden)</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>1</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Bump Mapping und Shadow Mapping aktivieren</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>2</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Nur Shadow Mapping aktivieren</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>3</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Wireframe Darstellung einschalten</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>4</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Wireframe Darstellung ausschalten</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=183 valign=top style='width:109.9pt;border-top:none;border-left:
+  solid #4F81BD 1.0pt;border-bottom:solid #4F81BD 1.0pt;border-right:dotted windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'><b>5 und anschließend 6</b></p>
+  </td>
+  <td width=611 valign=top style='width:366.3pt;border-top:none;border-left:
+  none;border-bottom:solid #4F81BD 1.0pt;border-right:solid #4F81BD 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Multisampling-Modi ein- bzw. durchschalten (Toggle MSAA)</p>
+  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal'>Anfangs-SampleCount = 8x</p>
+  </td>
+ </tr>
+</table>
+
+<h1><a name="_Toc341647363"></a><a name="_Toc341647349">Abhängigkeitendiagramm:</a></h1>
+
+<h2><span style='font-size:11.0pt;line-height:115%;font-family:"Calibri","sans-serif";
+font-weight:normal;font-style:normal'>Dieses an UML angelehnte Abhängigkeitsdiagramm
+soll die wichtigsten Attribute und Operationen von Klassen überblicklich
+darstellen sowie die Abhängigkeiten zu den Klassen aufzuzeigen:</span></h2>
+
+<p class=MsoNormal><img width=756 height=423
+src="Class-Diagram.png"></p>
+
+<h2><a name="_Toc341647370"></a><a name="_Toc341647356">Licht (Spotlight)-Klasse:</a></h2>
+
+<p class=MsoNormal>Die Position des Spot-Lights kann mit den Pfeiltasten
+geändert werden. Der Öffnungswinkel des Lichtes beträgt 90° und die
+Blickrichtung ist immer zum Ursprung xyz=(0,0,0). Eine Positionsänderung führt
+daher zu einer Richtungsänderung und hat auch direkte Auswirkung auf den
+Schattenfall zur Folge. Die Farbeigenschaften des Lichtes sind Ambient Color =
+RGB(0.1, 0.1, 0.1) und Diffuse Color = RGB(1.0, 1.0, 1.0f).</p>
+
+<h2>Model:</h2>
+
+<p class=MsoNormal>Die Modelle werden aus einem Plain-Text File eingelesen.
+Dazu wird aus den eingelesenen Vertices eine Triangle-List gebildet. Um die
+korrekte Darstellung samt Beleuchtung und Bump Mapping zu ermöglichen, müssen
+folgende Eigenschaften definiert sein:</p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:35.7pt;margin-bottom:.0001pt;text-indent:-17.85pt;line-height:normal'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Position (Vector3)</p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:35.7pt;margin-bottom:.0001pt;text-indent:-17.85pt;line-height:normal'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Texture (Vector2)</p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:35.7pt;margin-bottom:.0001pt;text-indent:-17.85pt;line-height:normal'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Normal (Vector3)</p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:35.7pt;margin-bottom:.0001pt;text-indent:-17.85pt;line-height:normal'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Tangent (Vetor 3)</p>
+
+<p class=MsoNormal style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;
+margin-left:35.7pt;margin-bottom:.0001pt;text-indent:-17.85pt;line-height:normal'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Birnormal (Vector3)</p>
+
+<h1><span style='font-size:16.0pt;line-height:115%'>&nbsp;</span></h1>
+
+<h1><span style='font-size:16.0pt;line-height:115%'>Verwendete Techniken</span></h1>
+
+<p class=MsoNormal>Das Projekt wurde in <b><u>C++</u></b> mit <b><u>Visual Studio
+2012</u></b> und der <b><u>Microsoft DirectX SDK June 2010</u></b> unter
+Verwendung von <b><u>DirectX 10</u></b> entwickelt.</p>
+
+<p class=MsoNormal>Für die Implementierung und Recherche zu den
+unterschiedlichen Techniken und dem prinzipiellen Aufbau einer DirectX
+Anwendung wurde primär die Webseite <a href="http://rastertek.com">http://rastertek.com</a>
+herangezogen, welche verschiedene Tutorials zu DirectX 10 und DirectX 11
+anbietet.</p>
+
+<h3>Kamerafahrt: Catmull Rom und Slerp Interpolation</h3>
+
+<p class=MsoNormal>Es ist eine automatisierte virtuelle Fahrt in der Szene
+möglich. Dazu wird die Kamera mit den Tasten W, S, A, D bewegt und die
+Blickrichtung mit der Maus verändert. Durch Drücken der Leertaste wird die
+aktuelle Position samt Blickrichtung als Kontrollpunkt der Kamerafahrt
+gespeichert. Nachdem mindestens 4 Kontrollpunkte hinzugefügt wurden, wird die
+Kamerafahrt durch Drücken von Enter begonnen.</p>
+
+<p class=MsoNormal>Die Kamera bewegt sich dann zwischen den Kontrollpunkten
+anhand einer Catmull-Rom Interpolation. Dazu wird die aktuelle Position mit der
+DirectX-Funktion <span style='font-size:9.5pt;line-height:115%;font-family:
+Consolas;color:black;background:white'>D3DXVec3CatmullRom</span><span
+style='font-size:9.5pt;line-height:115%;font-family:Consolas;color:black'> </span>berechnet.
+Zusätzlich wird die Blickrichtung anhand einer spherischen linearen
+Interpolation mit Hilfe der DirectX-Funktion <span style='font-size:9.5pt;
+line-height:115%;font-family:Consolas;color:black;background:white'>D3DXQuaternionSlerp</span>
+berechnet. </p>
+
+<h3>Schatten: Shadow Mapping</h3>
+
+<p class=MsoNormal>Der Depth Buffer, auch als Z-Buffer bekannt, dient der
+Speicherung der Tiefeninformation eines Pixels und eignet sich perfekt zur
+Verwendung beim Bump Mapping. Bei jedem Renderdurchgang wird daher zu Beginn für
+das Shadow Mapping mit Hilfe der <b><i><span style='color:#4F81BD'>Klasse</span></i></b>
+<b><i><span style='color:#4F81BD'>Render2Texture</span></i></b> eine 2D Textur
+gerendert, welche unter Zuhilfenahme des Depth Buffers (<b><i><span
+style='color:#4F81BD'>Klasse</span></i></b> <b><i><span style='color:#4F81BD'>DepthShader</span></i></b>
+mit <b><i><span style='color:#4F81BD'>Shader</span></i></b> <b><i><span
+style='color:#4F81BD'>depthshader.fx</span></i></b>) die Tiefeninformation der
+Szene aus der Sicht des Lichtes in eine Shadow Map speichert. Je größer die
+Auflösung der Shadow Map ist, desto feiner können die Informationen abgespeichert
+werden. In dieser Anwendung wurde das 6,25-fache der gerenderten
+Bildschirmauflösung von 1280x800 Pixel für die Shadow Map verwendet. Diese
+Auflösung wurde deswegen gewählt, weil sonst bei zu großer Distanz zwischen
+Licht und Szene die Schatten der Objekte zu grobkörnig werden würden.</p>
+
+<p class=MsoNormal>Beim eigentlichen Renderdurchgang wird nun die Tiefe des
+Wertes in der Shadow Map mit der Entfernung des Lichtes verglichen, um
+festzustellen, ob sich ein Pixel im Licht oder im Schatten befindet. Wenn sich
+das Licht vor dem Objekt befindet, wird dieser Pixel beleuchtet, ansonsten ist
+dieser verdeckt und wird nicht bzw. nur wenig beleuchtet. Diese Logik wird im
+Shader abgewickelt und erfolgt im <b><i><span style='color:#4F81BD'>Shader
+shadow.fx, </span></i></b>bzw. bei aktiviertem Bump Mapping im <b><i><span
+style='color:#4F81BD'>Shader shadowbump.fx.</span></i></b> Es sei angemerkt, dass
+alle Shader Informationen über das Licht benötigen, weswegen dem Shader sowohl die
+Richtung als auch die diffuse Farbe des Lichtes bekannt ist.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h3>Bump Mapping</h3>
+
+<p class=MsoNormal>Bump Mapping bzw. Normal Mapping dient zum Vortäuschen von
+geometrischen Details. Dazu werden die Normalvektoren eines Modells anhand der
+Informationen in einer speziellen Textur abgeändert, was in weiterer Folge bei
+der Beleuchtung des Objektes eine Änderung des Farbwertes aufgrund anderer
+Reflexion des Lichtes bei diesem Pixel zur Folge hat. Diese spezielle Textur
+wird Normal Map genannt und gibt zu jedem Pixel der eigentlichen Textur eine
+(farbcodierte) Richtung an. Verbiegt man nun die eigentlichen Normalvektoren
+der Geometrie mit denen der Normal Map, entsteht sozusagen eine andere Richtung
+der Oberfläche, wodurch es wirkt, als ob die Oberfläche Unebenheiten hat. Ohne
+dem Objekt mehr Geometrie geben zu müssen, kann der Oberfläche damit eine
+Struktur verliehen werden. Es ist daher eine relativ günstige Art, einem Objekt
+ein besseres Aussehen zu verleihen. Jedoch ist das Fehlen einer echten
+Oberflächenstruktur recht einfach beim Betrachten der Silhouette eines Objekten
+erkennbar, da dieses immer noch glatt ist und keine zusätzliche Struktur
+aufweist.</p>
+
+<p class=MsoNormal>Um diese Funktionalität zu unterstützen, wurde die Klasse <b><i><span
+style='color:#4F81BD'>TextureArray</span></i></b> erstellt, welche neben der
+eigentlichen Textur eines Objektes nun auch die Normal Map Textur enthält.
+Desweiteren wurde ein neuer <b><i><span style='color:#4F81BD'>Shader
+shadowbump.fx</span></i></b> erstellt, welche das Shadow Mapping um das Bump
+Mapping erweitert. Neben der Lichtfarbe und Lichtrichtung enthält der Shader
+nun auch den Tangenten- und Binormalvektor für die Bump Map Berechnungen. Da
+die Richtungsvektoren formatbedingt im Bereich von [0.0..1.0] gespeichert sind,
+erfolgt im Pixel Shader zudem noch eine Umrechnung in den Bereich [-1.0…1.0],
+in dem mit 2 multipliziert wird und anschließend der Wert 1 subtrahiert wird.
+Nun kann der Bump Normalvektor wie folgt berechnet werden:</p>
+
+<p class=MsoNormal><span style='font-size:9.5pt;line-height:115%;font-family:
+Consolas;color:black;background:white'>bumpNormal = input.normal + bumpMap.x *
+input.tangent + bumpMap.y * input.binormal;</span></p>
+
+<p class=MsoNormal>Anschließend wird der normalisierte Bump-Normalvektor für
+die Berechnung der Lichtintensität verwendet. </p>
+
+<h3>Anti-Aliasing</h3>
+
+<p class=MsoNormal>Um die Qualität des Renderings zu erhöhen, wurde
+Anti-Aliasing eingebaut. Aliasing tritt zum Beispiel auf, wenn mehrere Texel
+auf ein Pixel fallen und dieses dadurch nicht mehr exakt aufgelöst werden kann.
+Dies wirkt sich oft durch die Entstehung von Treppenstufen aus, wodurch Kanten  nicht
+mehr gerade sondern zackig aussehen.</p>
+
+<p class=MsoNormal>Anti-Aliasing muss gar nicht selber implementiert werden,
+sondern kann ganz einfach durch setzen einiger weniger Eigenschaften im DirectX
+Rasterizer Description (<span style='font-size:9.5pt;line-height:115%;
+font-family:Consolas;color:#2B91AF;background:white'>D3D10_RASTERIZER_DESC</span>)
+eingeschaltet werden, da diese Funktion bereits in Hardware implementiert ist.
+Je mehr Samples verwendet werden, desto höher die Qualität. Jedoch sind die
+Anzahl der Samples durch die Leistungsfähigkeit der Grafikkarte limitiert,
+weswegen die unterstützten MultiSample Levels der Grafikkarte durch Aufruf der
+DirectX Methode <span style='font-size:9.5pt;line-height:115%;font-family:Consolas;
+color:#2B91AF;background:white'>CheckMultisampleQualityLevels</span> abgefragt
+werden. Durch abwechselndes Drücken der Tasten 5 und 6 kann die Anzahl der
+verwendeten Samples getoggled werden (1, 4, 8, 16). Zu beachten ist, dass in
+den Grafikkartentreibereinstellungen die Option für Multisampling so gesetzt
+werden muss, dass die Einstellung der Anwendungen verwendet und nicht
+überschrieben wird.</p>
+
+</div>
+
+</body>
+
+</html>
