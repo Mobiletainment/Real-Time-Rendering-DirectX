@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\bump01.dds" />
+    <None Include="resources\cube.txt" />
+    <None Include="resources\depthshader.fx" />
+    <None Include="resources\shadow.fx" />
+    <None Include="resources\shadowbump.fx" />
+    <None Include="resources\sphere.txt" />
+    <None Include="resources\stone01.dds" />
+    <None Include="resources\sunmap.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Classes\Application.h" />
+    <ClInclude Include="Classes\Camera.h" />
+    <ClInclude Include="Classes\D3D.h" />
+    <ClInclude Include="Classes\DepthShader.h" />
+    <ClInclude Include="Classes\Graphics.h" />
+    <ClInclude Include="Classes\Helper.h" />
+    <ClInclude Include="Classes\ILight.h" />
+    <ClInclude Include="Classes\Input.h" />
+    <ClInclude Include="Classes\IShadowShader.h" />
+    <ClInclude Include="Classes\Model.h" />
+    <ClInclude Include="Classes\Render2Texture.h" />
+    <ClInclude Include="Classes\ShadowAndBumpShader.h" />
+    <ClInclude Include="Classes\ShadowShader.h" />
+    <ClInclude Include="Classes\SpotLight.h" />
+    <ClInclude Include="Classes\Texture.h" />
+    <ClInclude Include="Classes\TextureArray.h" />
+    <ClInclude Include="Classes\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Classes\Application.cpp" />
+    <ClCompile Include="Classes\Camera.cpp" />
+    <ClCompile Include="Classes\D3D.cpp" />
+    <ClCompile Include="Classes\DepthShader.cpp" />
+    <ClCompile Include="Classes\Graphics.cpp" />
+    <ClCompile Include="Classes\ILight.cpp" />
+    <ClCompile Include="Classes\Input.cpp" />
+    <ClCompile Include="Classes\main.cpp" />
+    <ClCompile Include="Classes\Model.cpp" />
+    <ClCompile Include="Classes\Render2Texture.cpp" />
+    <ClCompile Include="Classes\ShadowAndBumpShader.cpp" />
+    <ClCompile Include="Classes\ShadowShader.cpp" />
+    <ClCompile Include="Classes\SpotLight.cpp" />
+    <ClCompile Include="Classes\Texture.cpp" />
+    <ClCompile Include="Classes\TextureArray.cpp" />
+    <ClCompile Include="Classes\Timer.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6161E518-5CA1-4D9E-B7D7-46A7CD29A298}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RTGEngine</RootNamespace>
+    <ProjectName>Real-time Rendering Demo</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
